@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>humano x | Portafolio</title>
+<style>
+  body {
+    background-color: #000;
+    color: #00ff99;
+    font-family: "Courier New", monospace;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    margin: 0;
+  }
+
+  h1 {
+    font-size: 3.5rem;
+    margin-bottom: 0.2em;
+  }
+
+  h2 {
+    font-size: 1.7rem;
+    font-weight: normal;
+    margin-bottom: 2em;
+  }
+
+  .card {
+    border: 2px solid #00ff99;
+    padding: 50px;
+    border-radius: 14px;
+    text-align: center;
+    box-shadow: 0 0 25px #00ff99;
+    max-width: 700px;
+    transition: background-color 1s, box-shadow 1s;
+  }
+
+  input {
+    background: #000;
+    color: #00ff99;
+    border: 2px solid #00ff99;
+    font-size: 1.8rem;
+    text-align: center;
+    padding: 12px 20px;
+    border-radius: 8px;
+    width: 180px;
+    margin-top: 10px;
+  }
+
+  button {
+    background: #00ff99;
+    color: #000;
+    border: none;
+    font-size: 1.4rem;
+    padding: 12px 24px;
+    margin-left: 12px;
+    border-radius: 8px;
+    cursor: pointer;
+    font-weight: bold;
+    transition: background-color 0.3s;
+  }
+
+  button:hover {
+    background: #00ffaa;
+  }
+
+  #resultado {
+    font-size: 1.5rem;
+    margin-top: 25px;
+    min-height: 1.5em;
+  }
+
+  .fade-in {
+    animation: fadeIn 0.6s ease-in-out;
+  }
+
+  @keyframes fadeIn {
+    from { opacity: 0; }
+    to { opacity: 1; }
+  }
+
+  /* 🔴 Efecto rojo suave al fallar */
+  .error {
+    background-color: rgba(255, 0, 0, 0.15);
+    box-shadow: 0 0 25px rgba(255, 0, 0, 0.5);
+  }
+</style>
+</head>
+<body>
+
+  <div class="card" id="tarjeta">
+    <h1>programadorBox</h1>
+    <h2>Desarrollador & creador de ideas</h2>
+    <p style="font-size:1.6rem;">Demuestra que no eres un robot:</p>
+    <p style="font-size:2rem; margin-bottom: 0.8em;">¿Cuánto es 1 + 11? string</p>
+    <div>
+      <input id="respuesta" type="text" placeholder="Tu respuesta">
+      <button onclick="verificar()">Verificar</button>
+    </div>
+    <p id="resultado"></p>
+  </div>
+
+<script>
+function verificar() {
+  const r = document.getElementById('respuesta').value.trim();
+  const resultado = document.getElementById('resultado');
+  const tarjeta = document.getElementById('tarjeta');
+
+  resultado.classList.remove('fade-in');
+  tarjeta.classList.remove('error');
+
+  setTimeout(() => {
+    if (r === "111") {
+      resultado.textContent = "✅ Acceso concedido, programador.";
+    } else if (r === "12") {
+      resultado.textContent = "❌ Incorrecto... recuerda los datos son string.";
+      tarjeta.classList.add('error'); // 🔴 Activa efecto rojo
+    } else if (r === "") {
+      resultado.textContent = "🤖 No puedes dejarlo vacío.";
+      tarjeta.classList.add('error');
+    } else {
+      resultado.textContent = "🤔 Hmm... interesante respuesta.";
+      tarjeta.classList.add('error');
+    }
+    resultado.classList.add('fade-in');
+
+    // 🔄 Quitar el efecto rojo suavemente después de 1 segundo
+    setTimeout(() => tarjeta.classList.remove('error'), 3000);
+  }, 100);
+}
+</script>
+
+</body>
+</html>
