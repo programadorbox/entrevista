@@ -82,7 +82,7 @@
     to { opacity: 1; }
   }
 
-  /* 🔴 Efecto rojo suave al fallar */
+  /* Efecto rojo suave al fallar */
   .error {
     background-color: rgba(255, 0, 0, 0.15);
     box-shadow: 0 0 25px rgba(255, 0, 0, 0.5);
@@ -101,35 +101,48 @@
       <button onclick="verificar()">Verificar</button>
     </div>
     <p id="resultado"></p>
+
+    <div id="botonNextContainer" style="display: none; margin-top: 20px;">
+        <button onclick="irARepo()">NEXT 🚀</button>
+    </div>
   </div>
 
 <script>
+// Función para redirigir al repositorio de GitHub
+function irARepo() {
+    window.location.href = "https://github.com/programadorbox";
+}
+
 function verificar() {
-  const r = document.getElementById('respuesta').value.trim();
-  const resultado = document.getElementById('resultado');
-  const tarjeta = document.getElementById('tarjeta');
+    const r = document.getElementById('respuesta').value.trim();
+    const resultado = document.getElementById('resultado');
+    const tarjeta = document.getElementById('tarjeta');
+    const botonNextContainer = document.getElementById('botonNextContainer');
 
-  resultado.classList.remove('fade-in');
-  tarjeta.classList.remove('error');
+    resultado.classList.remove('fade-in');
+    tarjeta.classList.remove('error');
+    botonNextContainer.style.display = 'none'; // Ocultar el botón al inicio de la verificación
 
-  setTimeout(() => {
-    if (r === "111") {
-      resultado.textContent = "✅ Acceso concedido, programador.";
-    } else if (r === "12") {
-      resultado.textContent = "❌ Incorrecto... recuerda los datos son string.";
-      tarjeta.classList.add('error'); // 🔴 Activa efecto rojo
-    } else if (r === "") {
-      resultado.textContent = "🤖 No puedes dejarlo vacío.";
-      tarjeta.classList.add('error');
-    } else {
-      resultado.textContent = "🤔 Hmm... interesante respuesta.";
-      tarjeta.classList.add('error');
-    }
-    resultado.classList.add('fade-in');
+    setTimeout(() => {
+        if (r === "111") {
+            resultado.textContent = "✅ Acceso concedido, programador. ¡Adelante!";
+            // Mostrar el botón NEXT
+            botonNextContainer.style.display = 'block';
+        } else if (r === "12") {
+            resultado.textContent = "❌ Incorrecto... recuerda los datos son string.";
+            tarjeta.classList.add('error');
+        } else if (r === "") {
+            resultado.textContent = "🤖 No puedes dejarlo vacío.";
+            tarjeta.classList.add('error');
+        } else {
+            resultado.textContent = "🤔 Hmm... interesante respuesta.";
+            tarjeta.classList.add('error');
+        }
+        resultado.classList.add('fade-in');
 
-    // 🔄 Quitar el efecto rojo suavemente después de 1 segundo
-    setTimeout(() => tarjeta.classList.remove('error'), 3000);
-  }, 100);
+        // Quitar el efecto rojo suavemente después de 3 segundos
+        setTimeout(() => tarjeta.classList.remove('error'), 3000);
+    }, 100);
 }
 </script>
 
